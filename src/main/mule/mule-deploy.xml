@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="07a9b814-b5b8-43d9-9d61-5c335b7c71d2" >
+		<http:listener-connection host="0.0.0.0" port="8083" />
+	</http:listener-config>
+	<flow name="mule-deployFlow" doc:id="8d06ea01-b7c1-478e-b5d6-113669bb03c0" >
+		<http:listener doc:name="Listener" doc:id="1d8c5541-53a3-43a8-ac78-29f0357e72e1" config-ref="HTTP_Listener_config" path="/sample deploy"/>
+		<logger level="INFO" doc:name="Logger" doc:id="11d80922-1399-4205-a24d-5d45120d2803" />
+		<set-payload value="welcome jenkinscicd deploy" doc:name="Set Payload" doc:id="6bd9bc37-220d-4740-9e21-4d3c75256f38" />
+		<logger level="INFO" doc:name="Logger" doc:id="da1af080-d438-428f-87e4-d3d7df04127a" />
+	</flow>
+</mule>
